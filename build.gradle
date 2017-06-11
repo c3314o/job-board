@@ -28,7 +28,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 	compile("org.springframework.boot:spring-boot-starter-security")
-	//runtime('org.liquibase:liquibase-core')
+	runtime('org.liquibase:liquibase-core')
 	//compile('org.springframework.boot:spring-boot-starter-integration')
 	//compile('org.springframework.retry:spring-retry')
 	compileOnly('org.projectlombok:lombok')
