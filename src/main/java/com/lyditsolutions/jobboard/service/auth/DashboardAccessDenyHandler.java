@@ -17,7 +17,6 @@ import java.io.IOException;
 public class DashboardAccessDenyHandler implements AccessDeniedHandler {
 
 
-
     @Override
     public void handle(HttpServletRequest httpServletRequest,
                        HttpServletResponse httpServletResponse,

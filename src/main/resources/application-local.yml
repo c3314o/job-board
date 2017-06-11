@@ -4,6 +4,7 @@ logging:
     org:
       springframework:
         web: DEBUG
+      liquibase: DEBUG
 
 spring:
   datasource:
@@ -24,5 +25,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    generate-ddl: true
-    hibernate.ddl-auto: create
+    generate-ddl: false
+    hibernate.ddl-auto: update
+liquibase:
+  enabled: true

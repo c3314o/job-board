@@ -1,0 +1,99 @@
+databaseChangeLog:
+   - changeSet:
+       id: create-user-and-role-tables
+       author: Liyin ding
+       changes:
+         - createTable:
+             tableName: T_USER
+             columns:
+               - column:
+                   name: id
+                   type: UUID
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: username
+                   type: varchar(50)
+               - column:
+                   name: email_address
+                   type: varchar(50)
+                   constraints:
+                    nullable: false
+               - column:
+                   name: account_non_expired
+                   type: char(1)
+               - column:
+                   name: account_non_locked
+                   type: char(1)
+               - column:
+                   name: credential_non_expired
+                   type: char(1)
+               - column:
+                   name: enabled
+                   type: char(1)
+               - column:
+                   name: password
+                   type: varchar(255)
+               - column:
+                   name: version
+                   type: LONG
+                   constraints:
+                     nullable: false
+               - column:
+                   name: last_entry_ts
+                   type: TIMESTAMP
+         - createTable:
+             tableName: T_ROLE
+             columns:
+               - column:
+                   name: id
+                   type: UUID
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: name
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: version
+                   type: LONG
+         - createTable:
+             tableName: USER_ROLE
+             columns:
+               - column:
+                   name: user_id
+                   type: UUID
+                   constraints:
+                     nullable: false
+               - column:
+                   name: role_id
+                   type: UUID
+                   constraints:
+                     nullable: false
+         - addForeignKeyConstraint:
+             baseColumnNames: user_id
+             baseTableName: USER_ROLE
+             constraintName: fk_user_id_user_role
+             referencedColumnNames: id
+             referencedTableName: T_USER
+         - addForeignKeyConstraint:
+             baseColumnNames: role_id
+             baseTableName: USER_ROLE
+             constraintName: fk_role_id_user_role
+             referencedColumnNames: id
+             referencedTableName: T_ROLE
+         - loadData:
+             tableName: t_user
+             file: db/changelog/data/db.changeset-user.csv
+             separator: ','
+         - loadData:
+             tableName: t_role
+             file: db/changelog/data/db.changeset-role.csv
+             separator: ','
+         - loadData:
+             tableName: user_role
+             file: db/changelog/data/db.changeset-user-role.csv
+             separator: ','
